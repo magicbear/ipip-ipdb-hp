@@ -61,7 +61,6 @@ print(db.fields())
 print(db.build_time())
 print(db.find("1.12.13.255", "CN"))
 print(db.find_map("1.12.13.255", "CN"))
-print(db.find_info("1.12.13.255", "CN").country_name)
   </pre>
 
 ### 适用于IPDB格式的基站 IPv4 库
