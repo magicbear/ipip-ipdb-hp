@@ -9,6 +9,16 @@ python3 setup.py build
 python3 setup.py install
 ```
 
+### 官方库性能对比
+C Version:
+python3 ipdotnet_benchmark.py
+Load: 0.034990s  List Used: 0.2513652s  QPS: 397826/s
+Load: 0.286393s  Dict Used: 0.2991660s  QPS: 334262/s
+
+Py Version:
+Load: 0.074412s   List Used: 4.2106075s  QPS: 23750/s
+Load: 4.285052s   Map  Used: 4.4340391s  QPS: 22553/s
+
 ## Code Example
 ### 适用于IPDB格式的每周高级版，每日标准版，每日高级版，每日专业版，每日旗舰版
   <pre><code>
