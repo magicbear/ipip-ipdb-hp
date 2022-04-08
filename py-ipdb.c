@@ -37,7 +37,7 @@ static PyObject* ipdb_find(PyIPDB_Object *ps, PyObject *args) {
     PyObject* pyStr;
     if (PyLong_Check(ipobj))
     {
-        addr4.s_addr = PyLong_AsLong(ipobj);
+        addr4.s_addr = htonl(PyLong_AsLong(ipobj));
         l_ip = &addr4.s_addr;
         ip_bits = 32;
     } else if (PyUnicode_Check(ipobj))
@@ -186,7 +186,7 @@ static PyObject* ipdb_find_map(PyIPDB_Object *ps, PyObject *args) {
     PyObject* pyStr;
     if (PyLong_Check(ipobj))
     {
-        addr4.s_addr = PyLong_AsLong(ipobj);
+        addr4.s_addr = htonl(PyLong_AsLong(ipobj));
         l_ip = &addr4.s_addr;
         ip_bits = 32;
     } else if (PyUnicode_Check(ipobj))
