@@ -1,4 +1,4 @@
-# ipdb-python
+# ipip-ipdb-hp
 High performance IPIP.net unofficially database ipdb format parsing library
 
 # Python Parse ipdb file
