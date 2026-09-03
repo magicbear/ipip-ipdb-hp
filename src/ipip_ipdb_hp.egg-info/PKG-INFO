@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: ipip-ipdb-hp
 Version: 0.1.1
 Summary: IPIP.net non-officially supported IP database ipdb format parsing library
@@ -11,6 +11,15 @@ Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: Apache Software License
 Classifier: Operating System :: OS Independent
 Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: summary
 
 # ipip-ipdb-hp
 High performance IPIP.net unofficially database ipdb format parsing library

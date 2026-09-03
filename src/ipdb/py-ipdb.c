@@ -38,7 +38,7 @@ static PyObject* ipdb_find(PyIPDB_Object *ps, PyObject *args) {
     if (PyLong_Check(ipobj))
     {
         addr4.s_addr = htonl(PyLong_AsLong(ipobj));
-        l_ip = &addr4.s_addr;
+        l_ip = (u_char *) &addr4.s_addr;
         ip_bits = 32;
     } else if (PyUnicode_Check(ipobj))
     {
@@ -47,11 +47,11 @@ static PyObject* ipdb_find(PyIPDB_Object *ps, PyObject *args) {
     {
         if (PyBytes_Size(ipobj) == 4)
         {
-            l_ip = PyBytes_AS_STRING(ipobj);
+            l_ip = (u_char *) PyBytes_AS_STRING(ipobj);
             ip_bits = 32;
         } else if (PyBytes_Size(ipobj) == 16)
         {
-            l_ip = PyBytes_AS_STRING(ipobj);
+            l_ip = (u_char *) PyBytes_AS_STRING(ipobj);
             ip_bits = 128;
         } else 
         {
@@ -69,10 +69,10 @@ static PyObject* ipdb_find(PyIPDB_Object *ps, PyObject *args) {
 
         if (inet_pton(AF_INET, ip, &addr4)) {
             ip_bits = 32;
-            l_ip = &addr4.s_addr;
+            l_ip = (u_char *) &addr4.s_addr;
         } else if (inet_pton(AF_INET6, ip, &addr6)) {
             ip_bits = 128;
-            l_ip = &addr6.s6_addr;
+            l_ip = (u_char *) &addr6.s6_addr;
         } else {
             PyErr_SetString(PyExc_TypeError,
                             "Invalid IP Format");
@@ -187,7 +187,7 @@ static PyObject* ipdb_find_map(PyIPDB_Object *ps, PyObject *args) {
     if (PyLong_Check(ipobj))
     {
         addr4.s_addr = htonl(PyLong_AsLong(ipobj));
-        l_ip = &addr4.s_addr;
+        l_ip = (u_char *) &addr4.s_addr;
         ip_bits = 32;
     } else if (PyUnicode_Check(ipobj))
     {
@@ -196,11 +196,11 @@ static PyObject* ipdb_find_map(PyIPDB_Object *ps, PyObject *args) {
     {
         if (PyBytes_Size(ipobj) == 4)
         {
-            l_ip = PyBytes_AS_STRING(ipobj);
+            l_ip = (u_char *) PyBytes_AS_STRING(ipobj);
             ip_bits = 32;
         } else if (PyBytes_Size(ipobj) == 16)
         {
-            l_ip = PyBytes_AS_STRING(ipobj);
+            l_ip = (u_char *) PyBytes_AS_STRING(ipobj);
             ip_bits = 128;
         } else 
         {
@@ -218,10 +218,10 @@ static PyObject* ipdb_find_map(PyIPDB_Object *ps, PyObject *args) {
 
         if (inet_pton(AF_INET, ip, &addr4)) {
             ip_bits = 32;
-            l_ip = &addr4.s_addr;
+            l_ip = (u_char *) &addr4.s_addr;
         } else if (inet_pton(AF_INET6, ip, &addr6)) {
             ip_bits = 128;
-            l_ip = &addr6.s6_addr;
+            l_ip = (u_char *) &addr6.s6_addr;
         } else {
             PyErr_SetString(PyExc_TypeError,
                             "Invalid IP Format");
@@ -371,31 +371,31 @@ static PyObject* ipdb_build_time(PyIPDB_Object *ps, PyObject *args) {
 // ml_doc:  Contents of this method's docstring
 static PyMethodDef ipdb_methods[] = {
     {   
-        "find", ipdb_find, METH_VARARGS,
+        "find", (PyCFunction) ipdb_find, METH_VARARGS,
         "Search for IP."
     },
     {   
-        "find_map", ipdb_find_map, METH_VARARGS,
+        "find_map", (PyCFunction) ipdb_find_map, METH_VARARGS,
         "Search for IP."
     },
     {
-        "languages", ipdb_languages, METH_NOARGS,
+        "languages", (PyCFunction) ipdb_languages, METH_NOARGS,
         "Get support languages."
     },
     {
-        "fields", ipdb_fields, METH_NOARGS,
+        "fields", (PyCFunction) ipdb_fields, METH_NOARGS,
         "Get support fields."
     },
     {
-        "is_ipv4", ipdb_is_support_ipv4, METH_NOARGS,
+        "is_ipv4", (PyCFunction) ipdb_is_support_ipv4, METH_NOARGS,
         "Get support IPv4."
     },
     {
-        "is_ipv6", ipdb_is_support_ipv6, METH_NOARGS,
+        "is_ipv6", (PyCFunction) ipdb_is_support_ipv6, METH_NOARGS,
         "Get support IPv6."
     },
     {
-        "build_time", ipdb_build_time, METH_NOARGS,
+        "build_time", (PyCFunction) ipdb_build_time, METH_NOARGS,
         "Get build time."
     },
     {NULL, NULL, 0, NULL}

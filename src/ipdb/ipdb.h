@@ -5,6 +5,9 @@
 #ifndef IPDB_C_IPDB_H
 #define IPDB_C_IPDB_H
 
+/* self-contained: u_char is used in the prototypes below */
+#include <sys/types.h>
+
 #define  IPv4  0x01
 #define  IPv6  0x02
 
@@ -56,5 +59,13 @@ int ipdb_reader_is_ipv4_support(ipdb_reader *reader);
 int ipdb_reader_is_ipv6_support(ipdb_reader *reader);
 
 int ipdb_reader_find(ipdb_reader *reader, const char *addr, const char *language, char *body);
+
+/* Used directly by py-ipdb.c to skip the string round-trip. Declared here
+   because GCC 14 makes calling an undeclared function an error
+   (-Wimplicit-function-declaration), and an implicit `int` return would be
+   wrong for any future non-int signature. */
+int ipdb_search(ipdb_reader *reader, const u_char *ip, int bit_count, int *node);
+
+int ipdb_resolve(ipdb_reader *reader, int node, const char **bytes);
 
 #endif //IPDB_C_IPDB_H
